@@ -1,113 +1,268 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>JavaScript Single-Page Applikationen</title>
+    <title>JavaScript Single-Page Applikationen</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/solarized.css">
-		<link rel="stylesheet" href="lib/css/zenburn.css">
-		<link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/solarized.css">
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/custom.css">
 
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<h2>JavaScript Single-Page Applikationen</h2>
-				</section>
-				<section>
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>JavaScript Single-Page Applikationen</h2>
+					<p>Slides unter <a href="https://github.com/runjak/nook2017">github.com/runjak/nook2017</a></p>
+        </section>
+        <section>
+          <section>
+            <h2>HTML → Browser</h2>
+            <p>…aber wie?</p>
+          </section>
+          <section>
+            <p>Statisches HTML vom Server</p>
+            <img class="vectorImage" src="./uml/staticServer.svg">
+          </section>
+          <section>
+            <p>Dynamisches HTML vom Server</p>
+            <img class="vectorImage" src="./uml/dynamicServer.svg">
+          </section>
+          <section>
+            <p>Dynamisches HTML im Browser</p>
+            <img class="vectorImage" src="./uml/dynamicClient.svg">
+          </section>
+        </section>
+        <section>
 					<section>
-						<h2>HTML → Browser</h2>
-						<p>…aber wie?</p>
+						<p>Vanilla JS</p>
+						<pre><code class="js">var body = document.querySelector('body');
+body.innerHtml = '&lt;h1&gt;Hello World!&lt;/h1&gt;';</code></pre>
 					</section>
+          <section>
+            <p>jQuery</p>
+            <pre><code class="js">$('body').html('&lt;h1&gt;Hello World!&lt;/h1&gt;');</code></pre>
+          </section>
+          <section>
+            <p>handlebars / mustache</p>
+            <pre><code class="handlebars">&lt;div class="entry"&gt;
+  &lt;h1&gt;{{ title }}&lt;/h1&gt;
+  &lt;div class="entryContent"&gt;
+    {{ content }}
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </section>
 					<section>
-						<p>Statisches HTML vom Server</p>
-						<img class="vectorImage" src="./uml/staticServer.svg">
+						<p>React</p>
+						<pre><code class="jsx">import React from 'react';
+import { render } from 'react-dom';
+
+render(
+  &lt;h2&gt;'Hello World!'&lt;/h2&gt;,
+  document.getElementById('root'),
+);</code></pre>
 					</section>
-					<section>
-						<p>Dynamisches HTML vom Server</p>
-						<img class="vectorImage" src="./uml/dynamicServer.svg">
-					</section>
-					<section>
-						<p>Dynamisches HTML im Browser</p>
-						<img class="vectorImage" src="./uml/dynamicClient.svg">
-					</section>
-					<section>
-						<p>Selbe Sprache für Server und Client?</p>
-					</section>
-				</section>
-				<section>
-					<section>
+        </section>
+        <section>
+          <section>
+            <h2>React</h2>
+						<p>Damit kann man user interfaces bauen</p>
+            <a href="https://reactjs.org/">reactjs.org</a>
+          </section>
+          <section>
+            <h2>React</h2>
+						<ul>
+							<li>Was macht es, und wie?</li>
+							<li class="fragment">Es rendert ein UserInterface</li>
+							<li class="fragment">Es soll möglichst nur Änderungen rendern<br />- das aber schnell</li>
+							<li class="fragment">Es soll aus Komponenten aufgebaut sein</li>
+							<li class="fragment">…die stecken wir dann zusammen.</li>
+						</ul>
+          </section>
+          <section>
 						<h2>React</h2>
-						<p>A JavaScript library for building user interfaces</p>
-						<a href="https://reactjs.org/">reactjs.org</a>
-					</section>
-					<section>
-						What does it do?
-						What problem is it aimed at?
-					</section>
-					<section>
-						What does it not do?
-					</section>
-					<section>
-						What problems does it have?
-					</section>
-					<section>
-						How does it look?
-					</section>
-					<section>
-						How can we style this?
-					</section>
-				</section>
-				<section>
-					The case for a functional style
-					Introducing the idea of immutable state
-					How to realise transactions on state in a client application?
-					<!-- The case for a functional style -->
+						<ul>
+							<li>Was macht es nicht?</li>
+							<!-- <li class="fragment">Mit der Applikationslogik helfen</li> -->
+							<li class="fragment">Mit APIs sprechen</li>
+							<li class="fragment">CSS ersetzen</li>
+							<li class="fragment">Den Techstack kleiner</li>
+						</ul>
+          </section>
 				</section>
 				<section>
 					<section>
-						<h2>Redux</h2>
-						<p>A predictable state container</p>
-						<a href="http://redux.js.org/">redux.js.org</a>
+						<p>…die nicht React Reactprobleme</p>
+					</section>
+					<section>
+						<h2>Module</h2>
+						<div class="fragment">
+							…in grauer Vorzeit:
+							<pre><code class="html">&lt;script /&gt;</code></pre>
+						</div>
+						<div class="fragment">
+							CommonJS:
+							<pre><code class="js">const modul = require('modul');</code></pre>
+						</div>
+						<div class="fragment">
+							AMD:
+							<pre><code class="js">require(['modul'], (modul) => {…});</code></pre>
+						</div>
+						<div class="fragment">
+							ES6:
+							<pre><code class="js">import Mainthing, { otherThing } from 'module';</code></pre>
+						</div>
+					</section>
+					<section>
+						<h2>Tooling</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Tool</th>
+									<th>Zweck</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><a href="https://webpack.js.org/" target="_blank">webpack</a></td>
+									<td>zusammenbauen</td>
+								</tr>
+								<tr>
+									<td><a href="https://eslint.org/" target="_blank">eslint</a></td>
+									<td>linter</td>
+								</tr>
+								<tr>
+									<td><a href="https://facebook.github.io/jest/" target="_blank">jest</a></td>
+									<td>tests</td>
+								</tr>
+								<tr>
+									<td><a href="flowtype.org" target="_blank">flow</a></td>
+									<td>typechecking</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="fragment">
+							Hilfe beim Setup:
+							<a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>
+						</div>
 					</section>
 				</section>
 				<section>
-					<!-- Reselect -->
+					<section>
+						<h2>Mutable state</h2>
+						<p class="fragment">…gar nicht mal so geil.</p>
+					</section>
+					<section>
+						<h3>Schwieriger mit mutable state:</h3>
+						<ul>
+							<li class="fragment">Nebenläufigkeit</li>
+							<li class="fragment">Veränderungen bemerken</li>
+							<li class="fragment">Code verstehen</li>
+							<li class="fragment">Code testen</li>
+							<li class="fragment">Refactoring</li>
+						</ul>
+						<p class="fragment">
+							Aber: wir wollen ja auch was machen!
+						</p>
+					</section>
 				</section>
 				<section>
-					Is there an example?
+					<section>
+						<h2>Die Flux-Architektur</h2>
+						<p>…Facebook hat da mal was 'neu' erfunden.</p>
+					</section>
+					<section>
+						<h2>Die Idee:</h2>
+						<ul>
+							<li class="fragment">Allen State zusammen isolieren</li>
+							<li class="fragment">Transaktionen auf immutable state</li>
+							<li class="fragment">Clever mitbekommen, wo sich was ändert</li>
+						</ul>
+					</section>
+					<section>
+            <img class="vectorImage" style="height: 85vh;" src="./uml/fluxOverview.svg">
+					</section>
 				</section>
 				<section>
-					Aftermath
-					Fragen?
-					Teardown
-				</section>
-			</div>
-		</div>
+          <section>
+            Wie sieht sowas aus?
+          </section>
+					<section>
+						<pre><code class="jsx">import React from 'react';
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+function SimpleButton(props) {
+  const { label, clickHandler } = props;
 
-		<script>
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+  return (
+    <button onClick={clickHandler}>
+      {label}
+    </button>
+  );
+}
+
+export default SimpleButton;
+						</code></pre>
+					</section>
+          <section>
+            How can we style this?
+          </section>
+          <section>
+						<h2>React</h2>
+						<ul>
+							<li>Was für Probleme bringt es mit?</li>
+						</ul>
+            What problems does it have?
+          </section>
+        </section>
+        <section>
+          The case for a functional style
+          Introducing the idea of immutable state
+          How to realise transactions on state in a client application?
+          <!-- The case for a functional style -->
+        </section>
+        <section>
+          <section>
+            <h2>Redux</h2>
+            <p>A predictable state container</p>
+            <a href="http://redux.js.org/">redux.js.org</a>
+          </section>
+        </section>
+        <section>
+          <!-- Reselect -->
+        </section>
+        <section>
+          Is there an example?
+        </section>
+        <section>
+          Aftermath
+          Fragen?
+          Teardown
+        </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      Reveal.initialize({
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>
